@@ -52,4 +52,13 @@ enum MissionCategoryEnum: string
             self::LAINNYA          => '💡',
         };
     }
+
+    public function toGeneral(): self
+    {
+        return match ($this) {
+            self::KONTEN_MEDIA => self::PEMASARAN,
+            self::DATA_LAPORAN => self::ADMINISTRASI,
+            default            => $this,
+        };
+    }
 }

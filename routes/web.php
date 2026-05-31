@@ -33,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profiles/{user}', [App\Http\Controllers\PublicProfileController::class, 'show'])->name('profiles.show');
 
     // Progress Messages (Shared between UMKM and Mahasiswa)
-    Route::post('/progress/{progress}/messages', [\App\Http\Controllers\ProgressMessageController::class, 'store'])->name('progress.messages.store');
+    Route::post('/progress/{progress}/messages', [\App\Http\Controllers\ProgressMessageController::class, 'store'])
+        ->middleware('throttle:60,1')
+        ->name('progress.messages.store');
     Route::get('/progress/{progress}/messages', [\App\Http\Controllers\ProgressMessageController::class, 'index'])->name('progress.messages.index');
 
     // Notifications

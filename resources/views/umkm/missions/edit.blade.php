@@ -36,7 +36,7 @@
                             <select name="category" class="input-field" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach(\App\Enums\MissionCategoryEnum::generalCases() as $cat)
-                                <option value="{{ $cat->value }}" {{ old('category', $mission->category->value) == $cat->value ? 'selected' : '' }}>{{ $cat->icon() }} {{ $cat->label() }}</option>
+                                <option value="{{ $cat->value }}" {{ old('category', $mission->category->toGeneral()->value) == $cat->value ? 'selected' : '' }}>{{ $cat->icon() }} {{ $cat->label() }}</option>
                                 @endforeach
                             </select>
                             @error('category')<div style="font-size:.72rem;color:#EF4444;margin-top:.25rem;">{{ $message }}</div>@enderror

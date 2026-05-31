@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Mission;
 use App\Models\MissionProgress;
 use App\Models\User;
 
@@ -12,24 +13,46 @@ class MissionProgressPolicy
      */
     public function update(User $user, MissionProgress $progress): bool
     {
-        return $user->id === $progress->user_id;
+        return (int) $user->id === (int) $progress->user_id;
     }
 
     /**
      * Only the UMKM mission owner can approve/request revision.
+     * Safe against soft-deleted missions via withTrashed().
      */
     public function approve(User $user, MissionProgress $progress): bool
     {
-        return $user->id === $progress->mission->user_id;
+        $missionOwnerId = Mission::withTrashed()
+            ->where('id', $progress->mission_id)
+            ->value('user_id');
+
+        return $missionOwnerId !== null
+            && (int) $user->id === (int) $missionOwnerId;
     }
 
     /**
-     * Only the mahasiswa owner or UMKM mission owner can view.
+     * Mahasiswa owner, UMKM mission owner, or admin can view.
+     * Safe against soft-deleted missions via withTrashed().
      */
     public function view(User $user, MissionProgress $progress): bool
     {
-        return $user->id === $progress->user_id
-            || $user->id === $progress->mission->user_id
-            || $user->isAdmin();
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ((int) $user->id === (int) $progress->user_id) {
+            return true;
+        }
+
+        if ($user->isUmkm() && $progress->mission_id) {
+            $missionOwnerId = Mission::withTrashed()
+                ->where('id', $progress->mission_id)
+                ->value('user_id');
+
+            return $missionOwnerId !== null
+                && (int) $user->id === (int) $missionOwnerId;
+        }
+
+        return false;
     }
 }
