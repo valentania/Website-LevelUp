@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -10,13 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased" style="font-family:'Inter',sans-serif;background:#0F172A;min-height:100vh;">
+<body class="antialiased" style="font-family:'Inter',sans-serif;background:#0A0E2A;min-height:100vh;">
 
-    {{-- Background effects --}}
+    {{-- Background effects using LevelUp Brand Color Palette --}}
     <div style="position:fixed;inset:0;pointer-events:none;z-index:0;">
-        <div style="position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,#F1F5F9 0%,transparent 65%);"></div>
-        <div style="position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(205, 242, 43,0.04) 0%,transparent 65%);"></div>
-        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(205, 242, 43,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(205, 242, 43,0.025) 1px,transparent 1px);background-size:60px 60px;"></div>
+        {{-- Primary Blue Ambient Glow --}}
+        <div style="position:absolute;top:-250px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(30, 69, 251,0.22) 0%,transparent 70%);"></div>
+        {{-- Accent Lime Ambient Glow (Bottom Right) --}}
+        <div style="position:absolute;bottom:-150px;right:-150px;width:550px;height:550px;border-radius:50%;background:radial-gradient(circle,rgba(205, 242, 43,0.08) 0%,transparent 70%);"></div>
+        {{-- Accent Lime Ambient Glow (Top Left) --}}
+        <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(205, 242, 43,0.04) 0%,transparent 70%);"></div>
+        {{-- Brand Grid Pattern --}}
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(30, 69, 251,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(30, 69, 251,0.03) 1px,transparent 1px);background-size:60px 60px;"></div>
     </div>
 
     <div style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;">
@@ -26,13 +31,13 @@
             <span style="font-size:1.4rem;font-weight:800;background:#F8FAFC;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">LevelUp</span>
         </a>
 
-        {{-- Card --}}
-        <div style="width:100%;max-width:440px;background:#F8FAFC;backdrop-filter:blur(24px);border: 1px solid #475569;border-radius:24px;padding:2.5rem;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+        {{-- Card styled with modern branding border & shadow --}}
+        <div style="width:100%;max-width:440px;background:#FFFFFF;backdrop-filter:blur(24px);border: 1px solid rgba(30, 69, 251, 0.12);border-radius:24px;padding:2.5rem;box-shadow:0 24px 80px rgba(0,0,0,0.5), 0 0 40px rgba(30, 69, 251, 0.05);">
             {{ $slot }}
         </div>
 
         {{-- Back link --}}
-        <a href="/" style="margin-top:1.5rem;font-size:.8rem;color: #475569;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='rgba(205, 242, 43,0.7)'" onmouseout="this.style.color='rgba(248, 250, 252, 0.4)'">
+        <a href="/" style="margin-top:1.5rem;font-size:.8rem;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#CDF22B'" onmouseout="this.style.color='#94A3B8'">
             ← Kembali ke Beranda
         </a>
     </div>

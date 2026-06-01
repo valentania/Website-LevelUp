@@ -78,7 +78,7 @@
 
         <div style="text-align:center;font-size:.825rem;color: #475569;">
             Sudah punya akun?
-            <a href="{{ route('login') }}" style="color:#CDF22B;text-decoration:none;font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Masuk</a>
+            <a href="{{ route('login') }}" style="color:#1E45FB;text-decoration:none;font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Masuk</a>
         </div>
     </form>
 

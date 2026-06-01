@@ -126,15 +126,13 @@ class User extends Authenticatable
     {
         $points = $this->getTotalPoints();
         if ($points >= 10000) {
-            return ['name' => 'Master', 'icon' => '👑', 'color' => '#A855F7', 'bg' => 'rgba(168,85,247,0.12)', 'border' => 'rgba(168,85,247,0.3)'];
+            return ['name' => 'Hero', 'icon' => '🦸', 'color' => '#8B5CF6', 'bg' => 'rgba(139,92,246,0.12)', 'border' => 'rgba(139,92,246,0.3)'];
         } elseif ($points >= 5000) {
             return ['name' => 'Gold', 'icon' => '🥇', 'color' => '#EAB308', 'bg' => 'rgba(234,179,8,0.12)', 'border' => 'rgba(234,179,8,0.3)'];
         } elseif ($points >= 1000) {
             return ['name' => 'Silver', 'icon' => '🥈', 'color' => '#94A3B8', 'bg' => 'rgba(148,163,184,0.12)', 'border' => 'rgba(148,163,184,0.3)'];
-        } elseif ($points >= 250) {
-            return ['name' => 'Bronze', 'icon' => '🥉', 'color' => '#D97706', 'bg' => 'rgba(217,119,6,0.12)', 'border' => 'rgba(217,119,6,0.3)'];
         } else {
-            return ['name' => 'Beginner', 'icon' => '🌱', 'color' => '#10B981', 'bg' => 'rgba(16,185,129,0.12)', 'border' => 'rgba(16,185,129,0.3)'];
+            return ['name' => 'Bronze', 'icon' => '🥉', 'color' => '#D97706', 'bg' => 'rgba(217,119,6,0.12)', 'border' => 'rgba(217,119,6,0.3)'];
         }
     }
 

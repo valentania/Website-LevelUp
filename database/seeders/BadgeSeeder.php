@@ -116,7 +116,7 @@ class BadgeSeeder extends Seeder
                 'criteria_json'  => ['type' => 'early_completion', 'value' => 1],
             ],
 
-            // XP Rank badges (Bronze / Silver / Gold / Master)
+            // XP Rank badges (Bronze / Silver / Gold / Hero)
             [
                 'name'           => 'Bronze',
                 'slug'           => 'xp-bronze',
@@ -148,16 +148,19 @@ class BadgeSeeder extends Seeder
                 'criteria_json'  => ['type' => 'total_points', 'value' => 5000],
             ],
             [
-                'name'           => 'Master',
-                'slug'           => 'xp-master',
-                'description'    => 'Kumpulkan 10.000 XP. Legenda sesungguhnya!',
-                'icon'           => '👑',
+                'name'           => 'Hero',
+                'slug'           => 'xp-hero',
+                'description'    => 'Kumpulkan 10.000 XP. Pahlawan digital legendaris!',
+                'icon'           => '🦸',
                 'color'          => '#8B5CF6',
                 'type'           => 'xp_rank',
                 'required_value' => 10000,
                 'criteria_json'  => ['type' => 'total_points', 'value' => 10000],
             ],
         ];
+
+        // Clean up the old Master badge if it exists
+        Badge::where('slug', 'xp-master')->delete();
 
         foreach ($badges as $badge) {
             Badge::updateOrCreate(
