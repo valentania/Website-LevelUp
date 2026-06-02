@@ -60,15 +60,14 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Helper: check whether an index already exists (prevents duplicate index errors on re-run).
-     * Uses raw PDO SHOW INDEX to stay Doctrine-free (compatible with Laravel 11).
-     */
     private function hasIndex(string $table, string $indexName): bool
     {
-        $conn   = Schema::getConnection();
-        $prefix = $conn->getTablePrefix();
-        $rows   = $conn->select("SHOW INDEX FROM `{$prefix}{$table}` WHERE Key_name = ?", [$indexName]);
-        return count($rows) > 0;
+        $indexes = Schema::getIndexes($table);
+        foreach ($indexes as $index) {
+            if (($index['name'] ?? '') === $indexName) {
+                return true;
+            }
+        }
+        return false;
     }
 };

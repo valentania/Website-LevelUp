@@ -39,12 +39,19 @@ class MissionPolicy
     }
 
     /**
-     * Only the UMKM creator can delete (while draft).
+     * Only the UMKM creator can delete (draft, pending, or rejected).
+     * Note: missions are never actually created as 'draft' via the UI —
+     * they go directly to 'pending_review'. Allowing rejected missions to
+     * be deleted lets UMKM clean up declined submissions.
      */
     public function delete(User $user, Mission $mission): bool
     {
         return $user->id === $mission->user_id
-            && $mission->status === MissionStatusEnum::DRAFT;
+            && in_array($mission->status, [
+                MissionStatusEnum::DRAFT,
+                MissionStatusEnum::PENDING_REVIEW,
+                MissionStatusEnum::REJECTED,
+            ]);
     }
 
     /**

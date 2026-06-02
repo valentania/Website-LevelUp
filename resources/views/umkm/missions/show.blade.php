@@ -76,14 +76,14 @@
 
                 @if($mission->progress->progress_note)
                 <div style="margin-bottom:1.25rem;">
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205, 242, 43,0.5);margin-bottom:.625rem;">Deskripsi Hasil</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.625rem;">Deskripsi Hasil</div>
                     <p style="font-size:.875rem;color: #475569;line-height:1.7;white-space:pre-line;">{{ $mission->progress->progress_note }}</p>
                 </div>
                 @endif
 
                 @if($mission->progress->submission_link)
                 <div style="margin-bottom:1.25rem;">
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205, 242, 43,0.5);margin-bottom:.5rem;">Link Project</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">Link Project</div>
                     <a href="{{ $mission->progress->submission_link }}" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1rem;background:rgba(205, 242, 43,0.08);border:1px solid rgba(205, 242, 43,0.2);border-radius:10px;font-size:.85rem;color:#CDF22B;text-decoration:none;" onmouseover="this.style.background='rgba(205, 242, 43,0.15)'" onmouseout="this.style.background='rgba(205, 242, 43,0.08)'">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         {{ $mission->progress->submission_link }}
@@ -148,7 +148,7 @@
             <div class="glass-card" style="padding:2rem;" id="chat-section">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
                     <div class="section-title">💬 Ruang Diskusi</div>
-                    <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#94A3B8;">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#475569;">
                         <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse-glow 2s infinite;"></div>
                         Live
                     </div>
@@ -158,7 +158,7 @@
                     @forelse($mission->progress->messages as $msg)
                         @php $isMe = $msg->sender_id === auth()->id(); @endphp
                         <div style="display:flex;flex-direction:column;align-items:{{ $isMe ? 'flex-end' : 'flex-start' }};">
-                            <div style="font-size:.68rem;color:#94A3B8;margin-bottom:.25rem;padding:0 4px;">{{ $isMe ? 'Kamu' : $msg->sender->name }} · {{ $msg->created_at->format('d M H:i') }}</div>
+                            <div style="font-size:.68rem;color:#64748B;margin-bottom:.25rem;padding:0 4px;">{{ $isMe ? 'Kamu' : $msg->sender->name }} · {{ $msg->created_at->format('d M H:i') }}</div>
                             <div style="background:{{ $isMe ? 'rgba(30,69,251,0.08)' : '#F8FAFC' }};border:1px solid {{ $isMe ? 'rgba(30,69,251,0.15)' : 'rgba(30,69,251,0.06)' }};padding:.75rem 1rem;border-radius:12px;border-{{ $isMe ? 'bottom-right' : 'bottom-left' }}-radius:0;max-width:85%;font-size:.875rem;color:#0F172A;line-height:1.5;white-space:pre-wrap;">{{ $msg->message }}</div>
                         </div>
                     @empty
@@ -267,7 +267,7 @@
                     <div style="width:32px;height:32px;border-radius:10px;background:rgba(205, 242, 43,0.1);display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;color:#CDF22B;">{{ strtoupper(substr($app->mahasiswa->name,0,1)) }}</div>
                     <div style="flex:1;min-width:0;">
                         <div style="font-size:.825rem;font-weight:600;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $app->mahasiswa->name }}</div>
-                        <div style="font-size:.7rem;color:rgba(248, 250, 252, 0.35);">{{ $app->mahasiswa->mahasiswaProfile?->university ?? '' }}</div>
+                        <div style="font-size:.7rem;color:#64748B;">{{ $app->mahasiswa->mahasiswaProfile?->university ?? '' }}</div>
                     </div>
                 </div>
                 @endforeach
@@ -285,7 +285,6 @@
 </div>
 </x-app-layout>
 
-@push('scripts')
 <script>
 @if($mission->progress)
 const MSG_URL  = '{{ route('progress.messages.store', $mission->progress) }}';
@@ -301,26 +300,43 @@ function buildBubble(msg) {
     const bg     = msg.isMe ? 'rgba(30,69,251,0.08)' : '#F8FAFC';
     const border = msg.isMe ? 'rgba(30,69,251,0.15)' : 'rgba(30,69,251,0.06)';
     const corner = msg.isMe ? 'bottom-right' : 'bottom-left';
-    return `<div style="display:flex;flex-direction:column;align-items:${align};">
-        <div style="font-size:.68rem;color:#94A3B8;margin-bottom:.25rem;padding:0 4px;">${msg.sender} · ${msg.created_at}</div>
-        <div style="background:${bg};border:1px solid ${border};padding:.75rem 1rem;border-radius:12px;border-${corner}-radius:0;max-width:85%;font-size:.875rem;color:#0F172A;line-height:1.5;white-space:pre-wrap;">${escHtml(msg.message)}</div>
-    </div>`;
+    const bubble = document.createElement('div');
+    bubble.style.cssText = `display:flex;flex-direction:column;align-items:${align};`;
+    bubble.innerHTML = `<div style="font-size:.68rem;color:#94A3B8;margin-bottom:.25rem;padding:0 4px;">${escHtml(msg.sender)} · ${escHtml(msg.created_at)}</div><div style="background:${bg};border:1px solid ${border};padding:.75rem 1rem;border-radius:12px;border-${corner}-radius:0;max-width:85%;font-size:.875rem;color:#0F172A;line-height:1.5;white-space:pre-wrap;">${escHtml(msg.message)}</div>`;
+    return bubble;
 }
 function scrollBottom() {
     const box = document.getElementById('chat-messages');
     if (box) box.scrollTop = box.scrollHeight;
 }
+const renderedMsgIds = new Set();
+@if($mission->progress)
+    @foreach($mission->progress->messages as $msg)
+        renderedMsgIds.add({{ $msg->id }});
+    @endforeach
+@endif
+
 function appendMessage(msg) {
+    if (msg.id && renderedMsgIds.has(msg.id)) return;
+    if (msg.id) renderedMsgIds.add(msg.id);
+    
     const empty = document.getElementById('empty-chat');
     if (empty) empty.remove();
     const box = document.getElementById('chat-messages');
     if (box) {
-        const el = document.createElement('div');
-        el.innerHTML = buildBubble(msg);
-        box.appendChild(el.firstChild);
+        box.appendChild(buildBubble(msg));
         scrollBottom();
         if (msg.ts) lastTs = msg.ts;
     }
+}
+function showChatError(msg) {
+    const input = document.getElementById('chat-input');
+    if (!input) return;
+    const errEl = document.createElement('div');
+    errEl.style.cssText = 'font-size:.75rem;color:#EF4444;margin-top:.375rem;';
+    errEl.textContent = msg;
+    input.parentNode.appendChild(errEl);
+    setTimeout(() => errEl.remove(), 4000);
 }
 async function sendMessage() {
     const input = document.getElementById('chat-input');
@@ -338,8 +354,16 @@ async function sendMessage() {
             credentials: 'same-origin'
         });
         const data = await res.json();
-        if (data.success) { appendMessage(data.message); input.value = ''; }
-    } catch(e) { console.error(e); }
+        if (data.success) {
+            appendMessage(data.message);
+            input.value = '';
+        } else {
+            showChatError(data.error ?? 'Pesan gagal terkirim.');
+        }
+    } catch(e) {
+        console.error(e);
+        showChatError('Terjadi kesalahan jaringan. Coba lagi.');
+    }
     input.disabled = false;
     btn.disabled   = false;
     btn.style.opacity = '1';
@@ -350,11 +374,10 @@ async function pollMessages() {
         const url  = POLL_URL + (lastTs ? '?since=' + encodeURIComponent(lastTs) : '');
         const res  = await fetch(url, { headers: { 'Accept': 'application/json' }, credentials: 'same-origin' });
         const data = await res.json();
-        data.messages?.forEach(appendMessage);
+        if (Array.isArray(data.messages)) data.messages.forEach(appendMessage);
     } catch(e) {}
 }
 scrollBottom();
 setInterval(pollMessages, 3000);
 @endif
 </script>
-@endpush

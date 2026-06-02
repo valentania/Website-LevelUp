@@ -74,6 +74,11 @@ class MissionController extends Controller
             ->except(['skill_tags']) // form-only, not a DB column
             ->toArray();
 
+        // Normalize empty complexity string to null ("Admin yang memilih" option)
+        if (isset($data['complexity']) && $data['complexity'] === '') {
+            $data['complexity'] = null;
+        }
+
         $this->missionRepo->update($mission->id, $data);
 
         return redirect()->route('umkm.missions.show', $mission)

@@ -26,8 +26,10 @@
 
     <div style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;">
         {{-- Logo --}}
-        <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:2.5rem;">
-            <div style="width:44px;height:44px;border-radius:13px;background:#CDF22B;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 8px 24px rgba(205, 242, 43,0.35);">⚡</div>
+        <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;margin-bottom:2.5rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(30, 69, 251, 0.15); overflow: visible;">
+                <img src="{{ asset('images/logo.png') }}" alt="LevelUp Logo" style="height:32px;width:auto;object-fit:contain;">
+            </div>
             <span style="font-size:1.4rem;font-weight:800;background:#F8FAFC;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">LevelUp</span>
         </a>
 

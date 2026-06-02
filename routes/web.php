@@ -15,10 +15,6 @@ Route::get('/', function () {
 
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
 
-Route::get('/design-system', function () {
-    return view('design_system');
-})->name('design-system');
-
 // ─── Dashboard Redirect (role-based) ─────
 Route::get('/dashboard', [DashboardRedirectController::class, 'index'])
     ->middleware(['auth', 'verified'])

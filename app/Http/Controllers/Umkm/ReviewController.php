@@ -84,14 +84,24 @@ class ReviewController extends Controller
 
         \Illuminate\Support\Facades\DB::transaction(function () use ($request, $mission, $mahasiswa) {
             $this->reviewRepo->create([
-                'mission_id' => $mission->id,
-                'reviewer_id' => $request->user()->id,
-                'reviewee_id' => $mahasiswa->id,
-                'rating' => $request->rating,
-                'comment' => $request->comment,
-                'strengths' => $request->strengths,
+                'mission_id'   => $mission->id,
+                'reviewer_id'  => $request->user()->id,
+                'reviewee_id'  => $mahasiswa->id,
+                'rating'       => $request->rating,
+                'comment'      => $request->comment,
+                'strengths'    => $request->strengths,
                 'improvements' => $request->improvements,
             ]);
+
+            // Sync rating & testimonial back to the auto-generated portfolio entry.
+            // The portfolio was created during approve() before any review existed,
+            // so rating and client_testimonial were null at that point.
+            \App\Models\Portfolio::where('mission_id', $mission->id)
+                ->where('user_id', $mahasiswa->id)
+                ->update([
+                    'rating'             => $request->rating,
+                    'client_testimonial' => $request->comment,
+                ]);
 
             // Award review bonus points
             $this->pointService->awardReviewBonus($mahasiswa, $request->rating, $mission);

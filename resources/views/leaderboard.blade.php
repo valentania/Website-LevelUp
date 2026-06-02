@@ -37,7 +37,7 @@
                 <div style="font-size:.9rem;font-weight:700;color:#0F172A;margin-bottom:.25rem;">{{ Str::limit($topMahasiswa[1]->name,18) }}</div>
                 <div style="font-size:.75rem;color:#475569;">{{ $topMahasiswa[1]->mahasiswaProfile?->university ?? '' }}</div>
                 <div style="font-size:1.2rem;font-weight:800;color:#1E45FB;margin-top:.5rem;">{{ number_format($topMahasiswa[1]->mahasiswaProfile?->total_points ?? 0) }}</div>
-                <div style="font-size:.65rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;">poin</div>
+                <div style="font-size:.65rem;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">poin</div>
             </div>
         </div>
         {{-- 1st Place --}}
@@ -62,7 +62,7 @@
                 <div style="font-size:.9rem;font-weight:700;color:#0F172A;margin-bottom:.25rem;">{{ Str::limit($topMahasiswa[2]->name,18) }}</div>
                 <div style="font-size:.75rem;color:#475569;">{{ $topMahasiswa[2]->mahasiswaProfile?->university ?? '' }}</div>
                 <div style="font-size:1.2rem;font-weight:800;color:#F59E0B;margin-top:.5rem;">{{ number_format($topMahasiswa[2]->mahasiswaProfile?->total_points ?? 0) }}</div>
-                <div style="font-size:.65rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;">poin</div>
+                <div style="font-size:.65rem;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">poin</div>
             </div>
         </div>
     </div>
@@ -99,15 +99,15 @@
                 <div style="display:flex;gap:1.5rem;flex-shrink:0;flex-wrap:wrap;">
                     <div style="text-align:center;">
                         <div style="font-size:1rem;font-weight:800;color:#1E45FB;">{{ number_format($mahasiswa->mahasiswaProfile?->total_points ?? 0) }}</div>
-                        <div style="font-size:.65rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;">Poin</div>
+                        <div style="font-size:.65rem;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Poin</div>
                     </div>
                     <div style="text-align:center;">
                         <div style="font-size:1rem;font-weight:800;color:#0F172A;">{{ $mahasiswa->mahasiswaProfile?->missions_completed ?? 0 }}</div>
-                        <div style="font-size:.65rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;">Mission</div>
+                        <div style="font-size:.65rem;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Mission</div>
                     </div>
                     <div style="text-align:center;">
                         <div style="font-size:1rem;font-weight:800;color:#0F172A;">{{ $mahasiswa->badges->count() }}</div>
-                        <div style="font-size:.65rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;">Badge</div>
+                        <div style="font-size:.65rem;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Badge</div>
                     </div>
                 </div>
             </div>

@@ -44,7 +44,7 @@
             <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);border-radius:16px;padding:1.25rem 1.5rem;display:flex;gap:1rem;">
                 <div style="font-size:1.5rem;flex-shrink:0;">🔄</div>
                 <div>
-                    <div style="font-size:.875rem;font-weight:700;color:#fca5a5;margin-bottom:.375rem;">Permintaan Revisi</div>
+                    <div style="font-size:.875rem;font-weight:700;color:#DC2626;margin-bottom:.375rem;">Permintaan Revisi</div>
                     <p style="font-size:.825rem;color: #475569;line-height:1.6;">{{ $progress->revision_note }}</p>
                 </div>
             </div>
@@ -65,12 +65,12 @@
                     <span class="badge {{ $ss['class'] }}">{{ $ss['label'] }}</span>
                 </div>
 
-                <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205,242,43,0.5);margin-bottom:.5rem;">Deskripsi Hasil</div>
-                <p style="font-size:.875rem;color:#94A3B8;line-height:1.7;white-space:pre-line;margin-bottom:1.25rem;">{{ $progress->progress_note }}</p>
+                <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">Deskripsi Hasil</div>
+                <p style="font-size:.875rem;color:#334155;line-height:1.7;white-space:pre-line;margin-bottom:1.25rem;">{{ $progress->progress_note }}</p>
 
                 @if($progress->submission_link)
                 <div style="margin-bottom:1.25rem;">
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205,242,43,0.5);margin-bottom:.5rem;">Link Project</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">Link Project</div>
                     <a href="{{ $progress->submission_link }}" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1rem;background:rgba(205,242,43,0.08);border:1px solid rgba(205,242,43,0.2);border-radius:10px;font-size:.85rem;color:#CDF22B;text-decoration:none;word-break:break-all;" onmouseover="this.style.background='rgba(205,242,43,0.15)'" onmouseout="this.style.background='rgba(205,242,43,0.08)'">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         {{ $progress->submission_link }}
@@ -80,7 +80,7 @@
 
                 @if($progress->attachment_path)
                 <div>
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205,242,43,0.5);margin-bottom:.5rem;">File Lampiran</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">File Lampiran</div>
                     <a href="{{ Storage::url($progress->attachment_path) }}" target="_blank" class="btn btn-secondary btn-sm">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Download File Lampiran
@@ -123,7 +123,7 @@
                             <div id="file-placeholder">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(205, 242, 43,0.4)" stroke-width="1.5" style="margin:0 auto .75rem;display:block;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                                 <div style="font-size:.875rem;font-weight:600;color: #475569;">Drag & drop atau klik untuk pilih file</div>
-                                <div style="font-size:.75rem;color: #94A3B8;margin-top:.375rem;">PDF, ZIP, PNG, JPG — maks. 10MB</div>
+                                <div style="font-size:.75rem;color: #64748B;margin-top:.375rem;">PDF, ZIP, PNG, JPG — maks. 10MB</div>
                             </div>
                             <div id="file-selected" style="display:none;font-size:.875rem;font-weight:600;color:#CDF22B;"></div>
                         </div>
@@ -164,7 +164,7 @@
             <div class="glass-card" style="padding:2rem;" id="chat-section">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
                     <div class="section-title">💬 Ruang Diskusi</div>
-                    <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#94A3B8;">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#475569;">
                         <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse-glow 2s infinite;"></div>
                         Live
                     </div>
@@ -174,7 +174,7 @@
                     @forelse($progress->messages as $msg)
                         @php $isMe = $msg->sender_id === auth()->id(); @endphp
                         <div style="display:flex;flex-direction:column;align-items:{{ $isMe ? 'flex-end' : 'flex-start' }};">
-                            <div style="font-size:.68rem;color:#94A3B8;margin-bottom:.25rem;padding:0 4px;">{{ $isMe ? 'Kamu' : ($msg->sender->umkmProfile?->business_name ?? $msg->sender->name) }} · {{ $msg->created_at->format('d M H:i') }}</div>
+                            <div style="font-size:.68rem;color:#64748B;margin-bottom:.25rem;padding:0 4px;">{{ $isMe ? 'Kamu' : ($msg->sender->umkmProfile?->business_name ?? $msg->sender->name) }} · {{ $msg->created_at->format('d M H:i') }}</div>
                             <div style="background:{{ $isMe ? 'rgba(30,69,251,0.08)' : '#F8FAFC' }};border:1px solid {{ $isMe ? 'rgba(30,69,251,0.15)' : 'rgba(30,69,251,0.06)' }};padding:.75rem 1rem;border-radius:12px;border-{{ $isMe ? 'bottom-right' : 'bottom-left' }}-radius:0;max-width:85%;font-size:.875rem;color:#0F172A;line-height:1.5;white-space:pre-wrap;">{{ $msg->message }}</div>
                         </div>
                     @empty
@@ -210,13 +210,13 @@
                 <div class="section-title" style="margin-bottom:1.25rem;font-size:1rem;">Brief Mission</div>
                 @if($progress->mission->deliverables)
                 <div style="margin-bottom:1rem;">
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205, 242, 43,0.5);margin-bottom:.5rem;">Yang Diharapkan</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">Yang Diharapkan</div>
                     <p style="font-size:.825rem;color: #475569;line-height:1.65;white-space:pre-line;">{{ Str::limit($progress->mission->deliverables, 200) }}</p>
                 </div>
                 @endif
                 @if($progress->mission->requirements)
                 <div>
-                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(205, 242, 43,0.5);margin-bottom:.5rem;">Persyaratan</div>
+                    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1E45FB;margin-bottom:.5rem;">Persyaratan</div>
                     <p style="font-size:.825rem;color: #475569;line-height:1.65;white-space:pre-line;">{{ Str::limit($progress->mission->requirements, 150) }}</p>
                 </div>
                 @endif
@@ -240,7 +240,7 @@
                         {{ $i <= $currentIdx ? 'background:rgba(205, 242, 43,0.15);border:1px solid rgba(205, 242, 43,0.3);' : 'background: #F8FAFC;border: 1px solid #475569;opacity:.4;' }}">
                         {{ $st['icon'] }}
                     </div>
-                    <span style="font-size:.825rem;font-weight:{{ $i === $currentIdx ? '700' : '400' }};color:{{ $i <= $currentIdx ? '#F8FAFC' : 'rgba(248, 250, 252, 0.35)' }};">{{ $st['label'] }}</span>
+                    <span style="font-size:.825rem;font-weight:{{ $i === $currentIdx ? '700' : '400' }};color:{{ $i <= $currentIdx ? '#0F172A' : 'rgba(15, 23, 42, 0.4)' }};">{{ $st['label'] }}</span>
                     @if($i === $currentIdx)
                     <span class="badge badge-yellow" style="margin-left:auto;font-size:.65rem;">Sekarang</span>
                     @endif
@@ -292,7 +292,17 @@ function scrollBottom() {
     if (box) box.scrollTop = box.scrollHeight;
 }
 
+const renderedMsgIds = new Set();
+@if($progress)
+    @foreach($progress->messages as $msg)
+        renderedMsgIds.add({{ $msg->id }});
+    @endforeach
+@endif
+
 function appendMessage(msg) {
+    if (msg.id && renderedMsgIds.has(msg.id)) return;
+    if (msg.id) renderedMsgIds.add(msg.id);
+
     const empty = document.getElementById('empty-chat');
     if (empty) empty.remove();
     const box = document.getElementById('chat-messages');

@@ -53,7 +53,7 @@
             <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;" class="footer-grid">
                 <div>
                     <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                        <div style="width:36px;height:36px;border-radius:10px;background:#1E45FB;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#FFFFFF;font-weight:800;box-shadow:0 4px 12px rgba(30,69,251,0.25);">⚡</div>
+                        <img src="{{ asset('images/logo.png') }}" alt="LevelUp Logo" style="height:32px;width:auto;object-fit:contain;">
                         <span style="font-size:1.25rem;font-weight:800;color:#0F172A;font-family:'Plus Jakarta Sans',sans-serif;">LevelUp</span>
                     </div>
                     <p style="font-size:0.85rem;color:#475569;line-height:1.7;max-width:280px;">Platform kontribusi sosial digital yang menghubungkan mahasiswa berbakat dengan UMKM untuk menciptakan dampak nyata.</p>
@@ -86,7 +86,7 @@
             </div>
             <div class="divider"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-                <p style="font-size:0.8rem;color:#94A3B8;">© {{ date('Y') }} LevelUp. All rights reserved. Built with ❤️ for Indonesia.</p>
+                <p style="font-size:0.8rem;color:#94A3B8;">© {{ date('Y') }} LevelUp. All rights reserved.</p>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
                     <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse-glow 2s infinite;"></div>
                     <span style="font-size:0.75rem;color:#94A3B8;">All systems operational</span>

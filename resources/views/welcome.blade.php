@@ -376,26 +376,28 @@
         .hero-visual-wrapper {
             position: relative;
             width: 100%;
-            height: 480px;
+            max-width: 480px;
+            height: 520px;
             display: flex;
             justify-content: center;
             align-items: center;
+            perspective: 1000px;
+            margin: 0 auto;
         }
         .visual-glass-canvas {
             position: absolute;
             width: 380px;
             height: 380px;
-            border-radius: 40px;
-            border: 2px dashed rgba(30, 69, 251, 0.1);
-            animation: rotate-slow 25s linear infinite;
+            border-radius: 16px;
+            border: 2px dashed rgba(30, 69, 251, 0.15);
         }
         .floating-widget {
             position: absolute;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(30, 69, 251, 0.08);
-            border-radius: 20px;
+            border: 1px solid rgba(30, 69, 251, 0.1);
+            border-radius: 12px;
             padding: 1.25rem;
             box-shadow: var(--shadow-premium);
             transition: all 0.3s;
@@ -409,9 +411,9 @@
         
         /* Widget A: Active Mission completed Feed */
         .widget-mission-completed {
-            top: 20px;
-            left: -10px;
-            width: 280px;
+            top: 10px;
+            left: 0px;
+            width: 270px;
             animation: float-slow 6s ease-in-out infinite;
         }
         .widget-header {
@@ -464,9 +466,9 @@
 
         /* Widget B: Portfolio Stat Radial */
         .widget-portfolio-stat {
-            bottom: 30px;
-            right: 0px;
-            width: 250px;
+            bottom: 20px;
+            right: 10px;
+            width: 240px;
             animation: float-mid 8s ease-in-out infinite;
         }
         .widget-stat-value {
@@ -496,9 +498,9 @@
 
         /* Widget C: Floating Badge Display */
         .widget-badge-reward {
-            top: 140px;
-            right: -20px;
-            width: 190px;
+            top: 130px;
+            right: 0px;
+            width: 185px;
             text-align: center;
             animation: float-fast 5s ease-in-out infinite;
             border-left: 4px solid var(--accent-lime);
@@ -656,12 +658,7 @@
             line-height: 1.6;
         }
 
-        /* ── Bento Grid Showcase Section ── */
-        .bento-section {
-            padding: 120px 1.5rem;
-            background: #FDFDFD;
-            position: relative;
-        }
+
         .bento-grid {
             max-width: 1200px;
             margin: 0 auto;
@@ -1012,6 +1009,7 @@
 
         /* ── Action Box Banner Section (CTA) ── */
         .action-banner-section {
+            display: none;
             padding: 100px 1.5rem;
             background: var(--bg-white);
         }
@@ -1244,15 +1242,38 @@
 
         @media (max-width: 768px) {
             .landing-nav-redesign {
-                padding: 0 1.25rem;
+                padding: 0 0.5rem;
                 height: 56px;
                 border-radius: 16px;
+                gap: 4px;
             }
-            .nav-links, .nav-auth-buttons {
+            .nav-logo span {
                 display: none;
             }
+            .nav-links {
+                display: flex !important;
+                gap: 4px !important;
+            }
+            .nav-link-item {
+                font-size: 0.72rem !important;
+                padding: 4px 8px !important;
+                white-space: nowrap;
+            }
+            .nav-auth-buttons {
+                display: flex !important;
+                gap: 4px !important;
+            }
+            .btn-nav-login {
+                font-size: 0.72rem !important;
+                padding: 4px 8px !important;
+            }
+            .btn-premium.btn-sm {
+                font-size: 0.72rem !important;
+                padding: 6px 10px !important;
+                white-space: nowrap;
+            }
             .mobile-menu-toggle {
-                display: block;
+                display: none !important;
             }
             .hero-section {
                 padding-top: 140px;
@@ -1323,13 +1344,10 @@
 </head>
 <body>
 
-    <!-- Dynamic Overlay for Mobile Menu Navigation Drawer -->
-    <div class="drawer-overlay" id="drawer-overlay"></div>
-
     <!-- Redesigned High-fidelity Navigation Bar -->
     <nav class="landing-nav-redesign" id="landing-nav">
         <a href="/" class="nav-logo">
-            <div class="nav-logo-icon">⚡</div>
+            <img src="{{ asset('images/logo.png') }}" alt="LevelUp Logo" style="height:32px;width:auto;object-fit:contain;">
             <span>LevelUp</span>
         </a>
         
@@ -1347,29 +1365,7 @@
                 <a href="{{ route('register') }}" class="btn-premium btn-lime btn-sm">Daftar Gratis</a>
             @endauth
         </div>
-
-        <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
     </nav>
-
-    <!-- Mobile Navigation Drawer -->
-    <div class="nav-drawer" id="nav-drawer">
-        <a href="#features" class="nav-link-item" onclick="toggleMenu()">Fitur</a>
-        <a href="#how-it-works" class="nav-link-item" onclick="toggleMenu()">Cara Kerja</a>
-        <a href="/leaderboard" class="nav-link-item" onclick="toggleMenu()">Leaderboard</a>
-        
-        <div style="height: 1px; background-color: var(--border-light); margin: 10px 0;"></div>
-        
-        @auth
-            <a href="{{ route('dashboard') }}" class="btn-premium btn-lime btn-sm" onclick="toggleMenu()">Masuk Dashboard</a>
-        @else
-            <a href="{{ route('login') }}" class="btn-nav-login" style="padding: 10px 16px;" onclick="toggleMenu()">Masuk</a>
-            <a href="{{ route('register') }}" class="btn-premium btn-lime btn-sm" onclick="toggleMenu()">Daftar Gratis</a>
-        @endauth
-    </div>
 
     <!-- ── Hero Section Redesign ── -->
     <section class="hero-section">
@@ -1499,127 +1495,6 @@
                 <p>{{ $f['desc'] }}</p>
             </div>
             @endforeach
-        </div>
-    </section>
-
-    <!-- ── Bento Grid Portfolio Showcase Redesign ── -->
-    <section class="bento-section">
-        <div class="section-header-wrap">
-            <div class="section-subtitle">
-                <span class="pulse-dot"></span>
-                Showcase Fitur
-            </div>
-            <h2 class="headline-section">Pengalaman Antarmuka Premium</h2>
-            <p style="color: var(--text-muted); margin-top: 0.5rem;">Kami merancang sistem LevelUp dengan fokus visual tingkat tinggi dan kenyamanan maksimal bagi penggunanya.</p>
-        </div>
-
-        <div class="bento-grid">
-            <!-- Bento Card 1: Large col span 2 -->
-            <div class="bento-card bento-col-2 bento-row-2">
-                <div class="bento-card-header">
-                    <span class="bento-tag">Digital Hub</span>
-                    <h3>Pusat Pencarian Mission</h3>
-                    <p>Mahasiswa dapat dengan mudah menyortir pekerjaan digital berdasarkan kategori, reward, dan tingkat kesulitan.</p>
-                </div>
-                
-                <!-- Embedded Mini UI Mockup -->
-                <div class="bento-mission-explorer">
-                    <div class="bento-mission-item">
-                        <div>
-                            <div class="bento-m-title">E-Commerce Landing Page</div>
-                            <div style="font-size: 0.72rem; color: var(--text-muted);">Toko Kerajinan Rotan</div>
-                        </div>
-                        <span class="bento-m-difficulty diff-medium">Medium</span>
-                    </div>
-                    <div class="bento-mission-item">
-                        <div>
-                            <div class="bento-m-title">Social Media Feed Design</div>
-                            <div style="font-size: 0.72rem; color: var(--text-muted);">Warung Kopi Nusantara</div>
-                        </div>
-                        <span class="bento-m-difficulty diff-easy">Easy</span>
-                    </div>
-                    <div class="bento-mission-item">
-                        <div>
-                            <div class="bento-m-title">Fullstack Inventory App</div>
-                            <div style="font-size: 0.72rem; color: var(--text-muted);">Koperasi Simpan Pinjam</div>
-                        </div>
-                        <span class="bento-m-difficulty diff-hard">Hard</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bento Card 2: Row span 2 (Right Tall Card) -->
-            <div class="bento-card bento-row-2">
-                <div class="bento-card-header" style="max-width: 100%">
-                    <span class="bento-tag" style="background: rgba(205, 242, 43, 0.15); color: var(--text-dark);">Pencapaian</span>
-                    <h3>Sistem Reward Lencana</h3>
-                    <p>Naikkan level kontribusimu dan klaim lencana digital bergengsi.</p>
-                </div>
-                
-                <div class="bento-badge-grid">
-                    <div class="bento-badge-item">
-                        <div class="bento-badge-icon">🚀</div>
-                        <div class="bento-badge-name">Starter</div>
-                    </div>
-                    <div class="bento-badge-item">
-                        <div class="bento-badge-icon">🔥</div>
-                        <div class="bento-badge-name">Consistent</div>
-                    </div>
-                    <div class="bento-badge-item">
-                        <div class="bento-badge-icon">👑</div>
-                        <div class="bento-badge-name">Alpha</div>
-                    </div>
-                    <div class="bento-badge-item" style="opacity: 0.5;">
-                        <div class="bento-badge-icon">🛡️</div>
-                        <div class="bento-badge-name">Guardian</div>
-                    </div>
-                    <div class="bento-badge-item" style="opacity: 0.5;">
-                        <div class="bento-badge-icon">💡</div>
-                        <div class="bento-badge-name">Innovator</div>
-                    </div>
-                    <div class="bento-badge-item" style="opacity: 0.5;">
-                        <div class="bento-badge-icon">🎯</div>
-                        <div class="bento-badge-name">Sniper</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bento Card 3: Lower left -->
-            <div class="bento-card">
-                <div class="bento-card-header" style="max-width: 100%">
-                    <span class="bento-tag">Timeline</span>
-                    <h3>Progress Tracking Mudah</h3>
-                    <p>Lacak tahapan pekerjaan dari permohonan hingga proses transfer ilmu.</p>
-                </div>
-                <div class="bento-timeline">
-                    <div class="bento-timeline-step">
-                        <div class="bento-step-title">Dalam Pengerjaan</div>
-                        <div class="bento-step-desc">Mahasiswa mengupload berkas draf</div>
-                    </div>
-                    <div class="bento-timeline-step active">
-                        <div class="bento-step-title">Review Mitra UMKM</div>
-                        <div class="bento-step-desc">Menunggu persetujuan kualitas draf</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bento Card 4: Lower middle -->
-            <div class="bento-card">
-                <div class="bento-card-header" style="max-width: 100%">
-                    <span class="bento-tag">Kredensial</span>
-                    <h3>Digital Portfolio Kartu</h3>
-                    <p>Kompilasi CV digital terverifikasi dari platform.</p>
-                </div>
-                
-                <div class="bento-student-card">
-                    <div class="bento-std-avatar">B</div>
-                    <div class="bento-std-info">
-                        <h4>Budi Santoso</h4>
-                        <p>Informatika • Level 4</p>
-                        <span class="bento-std-pill">8 Mission Selesai</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1753,30 +1628,14 @@
         </div>
     </section>
 
-    <!-- ── Call To Action Redesign ── -->
-    <section class="action-banner-section">
-        <div class="cta-banner-card">
-            <!-- Floating glows for ambient agency style -->
-            <div class="cta-glow-dot" style="top: 20%; left: 10%;"></div>
-            <div class="cta-glow-dot" style="bottom: 15%; right: 15%;"></div>
-            
-            <div class="cta-banner-icon">⚡</div>
-            
-            <h2>Siap Mengakselerasi Dampak Digital?</h2>
-            <p>Bergabunglah dengan ribuan mahasiswa dan pelaku usaha dalam gerakan sosial digitalisasi nasional sekarang juga.</p>
-            
-            <a href="{{ route('register') }}" class="btn-premium btn-lime btn-lg">
-                🚀 Mulai Berkontribusi — Gratis!
-            </a>
-        </div>
-    </section>
+
 
     <!-- ── Premium Redesigned Footer ── -->
     <footer class="site-footer-redesign">
         <div class="footer-grid-premium">
             <div class="footer-brand">
                 <h4>
-                    <div class="nav-logo-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">⚡</div>
+                    <img src="{{ asset('images/logo.png') }}" alt="LevelUp Logo" style="height:28px;width:auto;object-fit:contain;">
                     <span>LevelUp</span>
                 </h4>
                 <p>Platform sosial kontribusi digital mahasiswa yang bersinergi memberdayakan kemandirian teknologi UMKM Indonesia.</p>
@@ -1844,30 +1703,7 @@
             }
         });
 
-        // Toggle Mobile Navigation Drawer Menu
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const navDrawer = document.getElementById('nav-drawer');
-        const drawerOverlay = document.getElementById('drawer-overlay');
 
-        function toggleMenu() {
-            navDrawer.classList.toggle('open');
-            drawerOverlay.classList.toggle('active');
-            
-            // Hamburger icon active state cross animation toggle
-            const lines = mobileToggle.querySelectorAll('span');
-            if (navDrawer.classList.contains('open')) {
-                lines[0].style.transform = 'translateY(6px) rotate(45deg)';
-                lines[1].style.opacity = '0';
-                lines[2].style.transform = 'translateY(-6px) rotate(-45deg)';
-            } else {
-                lines[0].style.transform = 'none';
-                lines[1].style.opacity = '1';
-                lines[2].style.transform = 'none';
-            }
-        }
-
-        mobileToggle.addEventListener('click', toggleMenu);
-        drawerOverlay.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
